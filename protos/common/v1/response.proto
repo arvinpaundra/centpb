@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package common.v1;
+
+import "common/v1/pagination.proto";
+
+option go_package = "github.com/arvinpaundra/centpb/gen/go/common/v1;common";
+
+message Meta {
+  int32 code = 1;
+  string message = 2;
+  repeated FieldError errors = 3;
+  common.v1.Pagination pagination = 4;
+}
+
+message FieldError {
+  string field = 1;
+  string message = 2;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package auth.v1;
+
+option go_package = "github.com/arvinpaundra/centpb/gen/go/auth/v1;auth";
+
+message CheckSessionRequest {
+  string token = 1;
+}
+
+message CheckSessionResponse {
+  int64 user_id = 1;
+}
+
+service AuthenticateService {
+  rpc CheckSession(CheckSessionRequest) returns (CheckSessionResponse);
+}
