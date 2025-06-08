@@ -1,0 +1,21 @@
+syntax = 'proto3';
+
+package user.v1;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "github.com/arvinpaundra/centpb/gen/go/user/v1;user";
+
+message FindUserDetailRequest {
+  string slug = 1;
+}
+
+message FindUserDetailResponse {
+  string email = 1;
+  string fullname = 2;
+  google.protobuf.StringValue image = 3;
+}
+
+service UserService {
+  rpc FindUserDetail(FindUserDetailRequest) returns (FindUserDetailResponse);
+}
