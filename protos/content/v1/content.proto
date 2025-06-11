@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package content.v1;
+
+option go_package = "github.com/arvinpaundra/centpb/gen/go/content/v1;content";
+
+message FindActiveContentRequest {
+  int64 user_id = 1;
+}
+
+message FindActiveContentResponse {
+  int64 id = 1;
+  int64 campaign_id = 2;
+}
+
+service ContentService {
+  rpc FindActiveContent(FindActiveContentRequest) returns (FindActiveContentResponse);
+}
