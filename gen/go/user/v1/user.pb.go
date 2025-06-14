@@ -7,6 +7,7 @@
 package user
 
 import (
+	v1 "github.com/arvinpaundra/centpb/gen/go/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -134,20 +135,122 @@ func (x *FindUserDetailResponse) GetImage() *wrapperspb.StringValue {
 	return nil
 }
 
+type UpdateUserBalanceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Amount        float64                `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserBalanceRequest) Reset() {
+	*x = UpdateUserBalanceRequest{}
+	mi := &file_user_v1_user_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserBalanceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserBalanceRequest) ProtoMessage() {}
+
+func (x *UpdateUserBalanceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_v1_user_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserBalanceRequest.ProtoReflect.Descriptor instead.
+func (*UpdateUserBalanceRequest) Descriptor() ([]byte, []int) {
+	return file_user_v1_user_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UpdateUserBalanceRequest) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateUserBalanceRequest) GetAmount() float64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+type UpdateUserBalanceResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Meta          *v1.Meta               `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateUserBalanceResponse) Reset() {
+	*x = UpdateUserBalanceResponse{}
+	mi := &file_user_v1_user_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateUserBalanceResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserBalanceResponse) ProtoMessage() {}
+
+func (x *UpdateUserBalanceResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_v1_user_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserBalanceResponse.ProtoReflect.Descriptor instead.
+func (*UpdateUserBalanceResponse) Descriptor() ([]byte, []int) {
+	return file_user_v1_user_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *UpdateUserBalanceResponse) GetMeta() *v1.Meta {
+	if x != nil {
+		return x.Meta
+	}
+	return nil
+}
+
 var File_user_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x12user/v1/user.proto\x12\auser.v1\x1a\x1egoogle/protobuf/wrappers.proto\"+\n" +
+	"\x12user/v1/user.proto\x12\auser.v1\x1a\x18common/v1/response.proto\x1a\x1egoogle/protobuf/wrappers.proto\"+\n" +
 	"\x15FindUserDetailRequest\x12\x12\n" +
 	"\x04slug\x18\x01 \x01(\tR\x04slug\"\x8e\x01\n" +
 	"\x16FindUserDetailResponse\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
 	"\bfullname\x18\x03 \x01(\tR\bfullname\x122\n" +
-	"\x05image\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\x05image2`\n" +
+	"\x05image\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\x05image\"B\n" +
+	"\x18UpdateUserBalanceRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x16\n" +
+	"\x06amount\x18\x02 \x01(\x01R\x06amount\"@\n" +
+	"\x19UpdateUserBalanceResponse\x12#\n" +
+	"\x04meta\x18\x01 \x01(\v2\x0f.common.v1.MetaR\x04meta2\xbc\x01\n" +
 	"\vUserService\x12Q\n" +
-	"\x0eFindUserDetail\x12\x1e.user.v1.FindUserDetailRequest\x1a\x1f.user.v1.FindUserDetailResponseB4Z2github.com/arvinpaundra/centpb/gen/go/user/v1;userb\x06proto3"
+	"\x0eFindUserDetail\x12\x1e.user.v1.FindUserDetailRequest\x1a\x1f.user.v1.FindUserDetailResponse\x12Z\n" +
+	"\x11UpdateUserBalance\x12!.user.v1.UpdateUserBalanceRequest\x1a\".user.v1.UpdateUserBalanceResponseB4Z2github.com/arvinpaundra/centpb/gen/go/user/v1;userb\x06proto3"
 
 var (
 	file_user_v1_user_proto_rawDescOnce sync.Once
@@ -161,21 +264,27 @@ func file_user_v1_user_proto_rawDescGZIP() []byte {
 	return file_user_v1_user_proto_rawDescData
 }
 
-var file_user_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_user_v1_user_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_user_v1_user_proto_goTypes = []any{
-	(*FindUserDetailRequest)(nil),  // 0: user.v1.FindUserDetailRequest
-	(*FindUserDetailResponse)(nil), // 1: user.v1.FindUserDetailResponse
-	(*wrapperspb.StringValue)(nil), // 2: google.protobuf.StringValue
+	(*FindUserDetailRequest)(nil),     // 0: user.v1.FindUserDetailRequest
+	(*FindUserDetailResponse)(nil),    // 1: user.v1.FindUserDetailResponse
+	(*UpdateUserBalanceRequest)(nil),  // 2: user.v1.UpdateUserBalanceRequest
+	(*UpdateUserBalanceResponse)(nil), // 3: user.v1.UpdateUserBalanceResponse
+	(*wrapperspb.StringValue)(nil),    // 4: google.protobuf.StringValue
+	(*v1.Meta)(nil),                   // 5: common.v1.Meta
 }
 var file_user_v1_user_proto_depIdxs = []int32{
-	2, // 0: user.v1.FindUserDetailResponse.image:type_name -> google.protobuf.StringValue
-	0, // 1: user.v1.UserService.FindUserDetail:input_type -> user.v1.FindUserDetailRequest
-	1, // 2: user.v1.UserService.FindUserDetail:output_type -> user.v1.FindUserDetailResponse
-	2, // [2:3] is the sub-list for method output_type
-	1, // [1:2] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	4, // 0: user.v1.FindUserDetailResponse.image:type_name -> google.protobuf.StringValue
+	5, // 1: user.v1.UpdateUserBalanceResponse.meta:type_name -> common.v1.Meta
+	0, // 2: user.v1.UserService.FindUserDetail:input_type -> user.v1.FindUserDetailRequest
+	2, // 3: user.v1.UserService.UpdateUserBalance:input_type -> user.v1.UpdateUserBalanceRequest
+	1, // 4: user.v1.UserService.FindUserDetail:output_type -> user.v1.FindUserDetailResponse
+	3, // 5: user.v1.UserService.UpdateUserBalance:output_type -> user.v1.UpdateUserBalanceResponse
+	4, // [4:6] is the sub-list for method output_type
+	2, // [2:4] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_user_v1_user_proto_init() }
@@ -189,7 +298,7 @@ func file_user_v1_user_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_v1_user_proto_rawDesc), len(file_user_v1_user_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

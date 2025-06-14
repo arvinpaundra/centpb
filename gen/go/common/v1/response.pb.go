@@ -26,7 +26,7 @@ type Meta struct {
 	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
 	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	Errors        []*FieldError          `protobuf:"bytes,3,rep,name=errors,proto3" json:"errors,omitempty"`
-	Pagination    *Pagination            `protobuf:"bytes,4,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	Pagination    *Pagination            `protobuf:"bytes,4,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -145,14 +145,15 @@ var File_common_v1_response_proto protoreflect.FileDescriptor
 
 const file_common_v1_response_proto_rawDesc = "" +
 	"\n" +
-	"\x18common/v1/response.proto\x12\tcommon.v1\x1a\x1acommon/v1/pagination.proto\"\x9a\x01\n" +
+	"\x18common/v1/response.proto\x12\tcommon.v1\x1a\x1acommon/v1/pagination.proto\"\xae\x01\n" +
 	"\x04Meta\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12-\n" +
-	"\x06errors\x18\x03 \x03(\v2\x15.common.v1.FieldErrorR\x06errors\x125\n" +
+	"\x06errors\x18\x03 \x03(\v2\x15.common.v1.FieldErrorR\x06errors\x12:\n" +
 	"\n" +
-	"pagination\x18\x04 \x01(\v2\x15.common.v1.PaginationR\n" +
-	"pagination\"<\n" +
+	"pagination\x18\x04 \x01(\v2\x15.common.v1.PaginationH\x00R\n" +
+	"pagination\x88\x01\x01B\r\n" +
+	"\v_pagination\"<\n" +
 	"\n" +
 	"FieldError\x12\x14\n" +
 	"\x05field\x18\x01 \x01(\tR\x05field\x12\x18\n" +
@@ -192,6 +193,7 @@ func file_common_v1_response_proto_init() {
 		return
 	}
 	file_common_v1_pagination_proto_init()
+	file_common_v1_response_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

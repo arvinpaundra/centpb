@@ -10,7 +10,7 @@ message Meta {
   int32 code = 1;
   string message = 2;
   repeated FieldError errors = 3;
-  common.v1.Pagination pagination = 4;
+  optional common.v1.Pagination pagination = 4;
 }
 
 message FieldError {

@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_FindUserDetail_FullMethodName = "/user.v1.UserService/FindUserDetail"
+	UserService_FindUserDetail_FullMethodName    = "/user.v1.UserService/FindUserDetail"
+	UserService_UpdateUserBalance_FullMethodName = "/user.v1.UserService/UpdateUserBalance"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
 	FindUserDetail(ctx context.Context, in *FindUserDetailRequest, opts ...grpc.CallOption) (*FindUserDetailResponse, error)
+	UpdateUserBalance(ctx context.Context, in *UpdateUserBalanceRequest, opts ...grpc.CallOption) (*UpdateUserBalanceResponse, error)
 }
 
 type userServiceClient struct {
@@ -47,11 +49,22 @@ func (c *userServiceClient) FindUserDetail(ctx context.Context, in *FindUserDeta
 	return out, nil
 }
 
+func (c *userServiceClient) UpdateUserBalance(ctx context.Context, in *UpdateUserBalanceRequest, opts ...grpc.CallOption) (*UpdateUserBalanceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserBalanceResponse)
+	err := c.cc.Invoke(ctx, UserService_UpdateUserBalance_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServiceServer is the server API for UserService service.
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
 type UserServiceServer interface {
 	FindUserDetail(context.Context, *FindUserDetailRequest) (*FindUserDetailResponse, error)
+	UpdateUserBalance(context.Context, *UpdateUserBalanceRequest) (*UpdateUserBalanceResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedUserServiceServer struct{}
 
 func (UnimplementedUserServiceServer) FindUserDetail(context.Context, *FindUserDetailRequest) (*FindUserDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindUserDetail not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateUserBalance(context.Context, *UpdateUserBalanceRequest) (*UpdateUserBalanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserBalance not implemented")
 }
 func (UnimplementedUserServiceServer) mustEmbedUnimplementedUserServiceServer() {}
 func (UnimplementedUserServiceServer) testEmbeddedByValue()                     {}
@@ -104,6 +120,24 @@ func _UserService_FindUserDetail_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_UpdateUserBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserBalanceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateUserBalance(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateUserBalance_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateUserBalance(ctx, req.(*UpdateUserBalanceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // UserService_ServiceDesc is the grpc.ServiceDesc for UserService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +148,10 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "FindUserDetail",
 			Handler:    _UserService_FindUserDetail_Handler,
+		},
+		{
+			MethodName: "UpdateUserBalance",
+			Handler:    _UserService_UpdateUserBalance_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
