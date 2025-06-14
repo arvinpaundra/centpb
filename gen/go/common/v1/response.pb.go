@@ -23,7 +23,7 @@ const (
 
 type Meta struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
 	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
 	Errors        []*FieldError          `protobuf:"bytes,3,rep,name=errors,proto3" json:"errors,omitempty"`
 	Pagination    *Pagination            `protobuf:"bytes,4,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
@@ -61,11 +61,11 @@ func (*Meta) Descriptor() ([]byte, []int) {
 	return file_common_v1_response_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Meta) GetCode() int32 {
+func (x *Meta) GetCode() string {
 	if x != nil {
 		return x.Code
 	}
-	return 0
+	return ""
 }
 
 func (x *Meta) GetMessage() string {
@@ -147,7 +147,7 @@ const file_common_v1_response_proto_rawDesc = "" +
 	"\n" +
 	"\x18common/v1/response.proto\x12\tcommon.v1\x1a\x1acommon/v1/pagination.proto\"\xae\x01\n" +
 	"\x04Meta\x12\x12\n" +
-	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\x04code\x18\x01 \x01(\tR\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\x12-\n" +
 	"\x06errors\x18\x03 \x03(\v2\x15.common.v1.FieldErrorR\x06errors\x12:\n" +
 	"\n" +
