@@ -3,19 +3,23 @@ syntax = 'proto3';
 package user.v1;
 
 import "common/v1/response.proto";
-import "google/protobuf/wrappers.proto";
 
 option go_package = "github.com/arvinpaundra/centpb/gen/go/user/v1;user";
+
+message User {
+  int64 id = 1;
+  string email = 2;
+  string fullname = 3;
+  optional string image = 4;
+}
 
 message FindUserDetailRequest {
   string slug = 1;
 }
 
 message FindUserDetailResponse {
-  int64 id = 1;
-  string email = 2;
-  string fullname = 3;
-  google.protobuf.StringValue image = 4;
+  common.v1.Meta meta = 1;
+  User user = 2;
 }
 
 message UpdateUserBalanceRequest {
@@ -27,7 +31,17 @@ message UpdateUserBalanceResponse {
   common.v1.Meta meta = 1;
 }
 
+message FindUserByKeyRequest {
+  string key = 1;
+}
+
+message FindUserByKeyResponse {
+  common.v1.Meta meta = 1;
+  User user = 2;
+}
+
 service UserService {
   rpc FindUserDetail(FindUserDetailRequest) returns (FindUserDetailResponse);
+  rpc FindUserByKey(FindUserByKeyRequest) returns (FindUserByKeyResponse);
   rpc UpdateUserBalance(UpdateUserBalanceRequest) returns (UpdateUserBalanceResponse);
 }
