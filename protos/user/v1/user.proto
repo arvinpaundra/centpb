@@ -10,14 +10,24 @@ message User {
   int64 id = 1;
   string email = 2;
   string fullname = 3;
-  optional string image = 4;
+  string key = 4;
+  optional string image = 5;
 }
 
 message FindUserDetailRequest {
-  string slug = 1;
+  int64 id = 1;
 }
 
 message FindUserDetailResponse {
+  common.v1.Meta meta = 1;
+  User user = 2;
+}
+
+message FindUserBySlugRequest {
+  string slug = 1;
+}
+
+message FindUserBySlugResponse {
   common.v1.Meta meta = 1;
   User user = 2;
 }
@@ -31,17 +41,8 @@ message UpdateUserBalanceResponse {
   common.v1.Meta meta = 1;
 }
 
-message FindUserByKeyRequest {
-  string key = 1;
-}
-
-message FindUserByKeyResponse {
-  common.v1.Meta meta = 1;
-  User user = 2;
-}
-
 service UserService {
   rpc FindUserDetail(FindUserDetailRequest) returns (FindUserDetailResponse);
-  rpc FindUserByKey(FindUserByKeyRequest) returns (FindUserByKeyResponse);
+  rpc FindUserBySlug(FindUserBySlugRequest) returns (FindUserBySlugResponse);
   rpc UpdateUserBalance(UpdateUserBalanceRequest) returns (UpdateUserBalanceResponse);
 }

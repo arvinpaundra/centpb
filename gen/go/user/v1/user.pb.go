@@ -27,7 +27,8 @@ type User struct {
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Email         string                 `protobuf:"bytes,2,opt,name=email,proto3" json:"email,omitempty"`
 	Fullname      string                 `protobuf:"bytes,3,opt,name=fullname,proto3" json:"fullname,omitempty"`
-	Image         *string                `protobuf:"bytes,4,opt,name=image,proto3,oneof" json:"image,omitempty"`
+	Key           string                 `protobuf:"bytes,4,opt,name=key,proto3" json:"key,omitempty"`
+	Image         *string                `protobuf:"bytes,5,opt,name=image,proto3,oneof" json:"image,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -83,6 +84,13 @@ func (x *User) GetFullname() string {
 	return ""
 }
 
+func (x *User) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
 func (x *User) GetImage() string {
 	if x != nil && x.Image != nil {
 		return *x.Image
@@ -92,7 +100,7 @@ func (x *User) GetImage() string {
 
 type FindUserDetailRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Slug          string                 `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -127,11 +135,11 @@ func (*FindUserDetailRequest) Descriptor() ([]byte, []int) {
 	return file_user_v1_user_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *FindUserDetailRequest) GetSlug() string {
+func (x *FindUserDetailRequest) GetId() int64 {
 	if x != nil {
-		return x.Slug
+		return x.Id
 	}
-	return ""
+	return 0
 }
 
 type FindUserDetailResponse struct {
@@ -186,6 +194,102 @@ func (x *FindUserDetailResponse) GetUser() *User {
 	return nil
 }
 
+type FindUserBySlugRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Slug          string                 `protobuf:"bytes,1,opt,name=slug,proto3" json:"slug,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindUserBySlugRequest) Reset() {
+	*x = FindUserBySlugRequest{}
+	mi := &file_user_v1_user_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindUserBySlugRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindUserBySlugRequest) ProtoMessage() {}
+
+func (x *FindUserBySlugRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_v1_user_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindUserBySlugRequest.ProtoReflect.Descriptor instead.
+func (*FindUserBySlugRequest) Descriptor() ([]byte, []int) {
+	return file_user_v1_user_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *FindUserBySlugRequest) GetSlug() string {
+	if x != nil {
+		return x.Slug
+	}
+	return ""
+}
+
+type FindUserBySlugResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Meta          *v1.Meta               `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
+	User          *User                  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindUserBySlugResponse) Reset() {
+	*x = FindUserBySlugResponse{}
+	mi := &file_user_v1_user_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindUserBySlugResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindUserBySlugResponse) ProtoMessage() {}
+
+func (x *FindUserBySlugResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_v1_user_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindUserBySlugResponse.ProtoReflect.Descriptor instead.
+func (*FindUserBySlugResponse) Descriptor() ([]byte, []int) {
+	return file_user_v1_user_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *FindUserBySlugResponse) GetMeta() *v1.Meta {
+	if x != nil {
+		return x.Meta
+	}
+	return nil
+}
+
+func (x *FindUserBySlugResponse) GetUser() *User {
+	if x != nil {
+		return x.User
+	}
+	return nil
+}
+
 type UpdateUserBalanceRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -196,7 +300,7 @@ type UpdateUserBalanceRequest struct {
 
 func (x *UpdateUserBalanceRequest) Reset() {
 	*x = UpdateUserBalanceRequest{}
-	mi := &file_user_v1_user_proto_msgTypes[3]
+	mi := &file_user_v1_user_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -208,7 +312,7 @@ func (x *UpdateUserBalanceRequest) String() string {
 func (*UpdateUserBalanceRequest) ProtoMessage() {}
 
 func (x *UpdateUserBalanceRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_v1_user_proto_msgTypes[3]
+	mi := &file_user_v1_user_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -221,7 +325,7 @@ func (x *UpdateUserBalanceRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserBalanceRequest.ProtoReflect.Descriptor instead.
 func (*UpdateUserBalanceRequest) Descriptor() ([]byte, []int) {
-	return file_user_v1_user_proto_rawDescGZIP(), []int{3}
+	return file_user_v1_user_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateUserBalanceRequest) GetId() int64 {
@@ -247,7 +351,7 @@ type UpdateUserBalanceResponse struct {
 
 func (x *UpdateUserBalanceResponse) Reset() {
 	*x = UpdateUserBalanceResponse{}
-	mi := &file_user_v1_user_proto_msgTypes[4]
+	mi := &file_user_v1_user_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -259,7 +363,7 @@ func (x *UpdateUserBalanceResponse) String() string {
 func (*UpdateUserBalanceResponse) ProtoMessage() {}
 
 func (x *UpdateUserBalanceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_v1_user_proto_msgTypes[4]
+	mi := &file_user_v1_user_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -272,7 +376,7 @@ func (x *UpdateUserBalanceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateUserBalanceResponse.ProtoReflect.Descriptor instead.
 func (*UpdateUserBalanceResponse) Descriptor() ([]byte, []int) {
-	return file_user_v1_user_proto_rawDescGZIP(), []int{4}
+	return file_user_v1_user_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateUserBalanceResponse) GetMeta() *v1.Meta {
@@ -282,131 +386,36 @@ func (x *UpdateUserBalanceResponse) GetMeta() *v1.Meta {
 	return nil
 }
 
-type FindUserByKeyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FindUserByKeyRequest) Reset() {
-	*x = FindUserByKeyRequest{}
-	mi := &file_user_v1_user_proto_msgTypes[5]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FindUserByKeyRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FindUserByKeyRequest) ProtoMessage() {}
-
-func (x *FindUserByKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_v1_user_proto_msgTypes[5]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FindUserByKeyRequest.ProtoReflect.Descriptor instead.
-func (*FindUserByKeyRequest) Descriptor() ([]byte, []int) {
-	return file_user_v1_user_proto_rawDescGZIP(), []int{5}
-}
-
-func (x *FindUserByKeyRequest) GetKey() string {
-	if x != nil {
-		return x.Key
-	}
-	return ""
-}
-
-type FindUserByKeyResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Meta          *v1.Meta               `protobuf:"bytes,1,opt,name=meta,proto3" json:"meta,omitempty"`
-	User          *User                  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *FindUserByKeyResponse) Reset() {
-	*x = FindUserByKeyResponse{}
-	mi := &file_user_v1_user_proto_msgTypes[6]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *FindUserByKeyResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*FindUserByKeyResponse) ProtoMessage() {}
-
-func (x *FindUserByKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_v1_user_proto_msgTypes[6]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use FindUserByKeyResponse.ProtoReflect.Descriptor instead.
-func (*FindUserByKeyResponse) Descriptor() ([]byte, []int) {
-	return file_user_v1_user_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *FindUserByKeyResponse) GetMeta() *v1.Meta {
-	if x != nil {
-		return x.Meta
-	}
-	return nil
-}
-
-func (x *FindUserByKeyResponse) GetUser() *User {
-	if x != nil {
-		return x.User
-	}
-	return nil
-}
-
 var File_user_v1_user_proto protoreflect.FileDescriptor
 
 const file_user_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x12user/v1/user.proto\x12\auser.v1\x1a\x18common/v1/response.proto\"m\n" +
+	"\x12user/v1/user.proto\x12\auser.v1\x1a\x18common/v1/response.proto\"\x7f\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x14\n" +
 	"\x05email\x18\x02 \x01(\tR\x05email\x12\x1a\n" +
-	"\bfullname\x18\x03 \x01(\tR\bfullname\x12\x19\n" +
-	"\x05image\x18\x04 \x01(\tH\x00R\x05image\x88\x01\x01B\b\n" +
-	"\x06_image\"+\n" +
-	"\x15FindUserDetailRequest\x12\x12\n" +
-	"\x04slug\x18\x01 \x01(\tR\x04slug\"`\n" +
+	"\bfullname\x18\x03 \x01(\tR\bfullname\x12\x10\n" +
+	"\x03key\x18\x04 \x01(\tR\x03key\x12\x19\n" +
+	"\x05image\x18\x05 \x01(\tH\x00R\x05image\x88\x01\x01B\b\n" +
+	"\x06_image\"'\n" +
+	"\x15FindUserDetailRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"`\n" +
 	"\x16FindUserDetailResponse\x12#\n" +
+	"\x04meta\x18\x01 \x01(\v2\x0f.common.v1.MetaR\x04meta\x12!\n" +
+	"\x04user\x18\x02 \x01(\v2\r.user.v1.UserR\x04user\"+\n" +
+	"\x15FindUserBySlugRequest\x12\x12\n" +
+	"\x04slug\x18\x01 \x01(\tR\x04slug\"`\n" +
+	"\x16FindUserBySlugResponse\x12#\n" +
 	"\x04meta\x18\x01 \x01(\v2\x0f.common.v1.MetaR\x04meta\x12!\n" +
 	"\x04user\x18\x02 \x01(\v2\r.user.v1.UserR\x04user\"B\n" +
 	"\x18UpdateUserBalanceRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x16\n" +
 	"\x06amount\x18\x02 \x01(\x01R\x06amount\"@\n" +
 	"\x19UpdateUserBalanceResponse\x12#\n" +
-	"\x04meta\x18\x01 \x01(\v2\x0f.common.v1.MetaR\x04meta\"(\n" +
-	"\x14FindUserByKeyRequest\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\"_\n" +
-	"\x15FindUserByKeyResponse\x12#\n" +
-	"\x04meta\x18\x01 \x01(\v2\x0f.common.v1.MetaR\x04meta\x12!\n" +
-	"\x04user\x18\x02 \x01(\v2\r.user.v1.UserR\x04user2\x8c\x02\n" +
+	"\x04meta\x18\x01 \x01(\v2\x0f.common.v1.MetaR\x04meta2\x8f\x02\n" +
 	"\vUserService\x12Q\n" +
-	"\x0eFindUserDetail\x12\x1e.user.v1.FindUserDetailRequest\x1a\x1f.user.v1.FindUserDetailResponse\x12N\n" +
-	"\rFindUserByKey\x12\x1d.user.v1.FindUserByKeyRequest\x1a\x1e.user.v1.FindUserByKeyResponse\x12Z\n" +
+	"\x0eFindUserDetail\x12\x1e.user.v1.FindUserDetailRequest\x1a\x1f.user.v1.FindUserDetailResponse\x12Q\n" +
+	"\x0eFindUserBySlug\x12\x1e.user.v1.FindUserBySlugRequest\x1a\x1f.user.v1.FindUserBySlugResponse\x12Z\n" +
 	"\x11UpdateUserBalance\x12!.user.v1.UpdateUserBalanceRequest\x1a\".user.v1.UpdateUserBalanceResponseB4Z2github.com/arvinpaundra/centpb/gen/go/user/v1;userb\x06proto3"
 
 var (
@@ -426,24 +435,24 @@ var file_user_v1_user_proto_goTypes = []any{
 	(*User)(nil),                      // 0: user.v1.User
 	(*FindUserDetailRequest)(nil),     // 1: user.v1.FindUserDetailRequest
 	(*FindUserDetailResponse)(nil),    // 2: user.v1.FindUserDetailResponse
-	(*UpdateUserBalanceRequest)(nil),  // 3: user.v1.UpdateUserBalanceRequest
-	(*UpdateUserBalanceResponse)(nil), // 4: user.v1.UpdateUserBalanceResponse
-	(*FindUserByKeyRequest)(nil),      // 5: user.v1.FindUserByKeyRequest
-	(*FindUserByKeyResponse)(nil),     // 6: user.v1.FindUserByKeyResponse
+	(*FindUserBySlugRequest)(nil),     // 3: user.v1.FindUserBySlugRequest
+	(*FindUserBySlugResponse)(nil),    // 4: user.v1.FindUserBySlugResponse
+	(*UpdateUserBalanceRequest)(nil),  // 5: user.v1.UpdateUserBalanceRequest
+	(*UpdateUserBalanceResponse)(nil), // 6: user.v1.UpdateUserBalanceResponse
 	(*v1.Meta)(nil),                   // 7: common.v1.Meta
 }
 var file_user_v1_user_proto_depIdxs = []int32{
 	7, // 0: user.v1.FindUserDetailResponse.meta:type_name -> common.v1.Meta
 	0, // 1: user.v1.FindUserDetailResponse.user:type_name -> user.v1.User
-	7, // 2: user.v1.UpdateUserBalanceResponse.meta:type_name -> common.v1.Meta
-	7, // 3: user.v1.FindUserByKeyResponse.meta:type_name -> common.v1.Meta
-	0, // 4: user.v1.FindUserByKeyResponse.user:type_name -> user.v1.User
+	7, // 2: user.v1.FindUserBySlugResponse.meta:type_name -> common.v1.Meta
+	0, // 3: user.v1.FindUserBySlugResponse.user:type_name -> user.v1.User
+	7, // 4: user.v1.UpdateUserBalanceResponse.meta:type_name -> common.v1.Meta
 	1, // 5: user.v1.UserService.FindUserDetail:input_type -> user.v1.FindUserDetailRequest
-	5, // 6: user.v1.UserService.FindUserByKey:input_type -> user.v1.FindUserByKeyRequest
-	3, // 7: user.v1.UserService.UpdateUserBalance:input_type -> user.v1.UpdateUserBalanceRequest
+	3, // 6: user.v1.UserService.FindUserBySlug:input_type -> user.v1.FindUserBySlugRequest
+	5, // 7: user.v1.UserService.UpdateUserBalance:input_type -> user.v1.UpdateUserBalanceRequest
 	2, // 8: user.v1.UserService.FindUserDetail:output_type -> user.v1.FindUserDetailResponse
-	6, // 9: user.v1.UserService.FindUserByKey:output_type -> user.v1.FindUserByKeyResponse
-	4, // 10: user.v1.UserService.UpdateUserBalance:output_type -> user.v1.UpdateUserBalanceResponse
+	4, // 9: user.v1.UserService.FindUserBySlug:output_type -> user.v1.FindUserBySlugResponse
+	6, // 10: user.v1.UserService.UpdateUserBalance:output_type -> user.v1.UpdateUserBalanceResponse
 	8, // [8:11] is the sub-list for method output_type
 	5, // [5:8] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name

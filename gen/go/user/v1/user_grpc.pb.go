@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	UserService_FindUserDetail_FullMethodName    = "/user.v1.UserService/FindUserDetail"
-	UserService_FindUserByKey_FullMethodName     = "/user.v1.UserService/FindUserByKey"
+	UserService_FindUserBySlug_FullMethodName    = "/user.v1.UserService/FindUserBySlug"
 	UserService_UpdateUserBalance_FullMethodName = "/user.v1.UserService/UpdateUserBalance"
 )
 
@@ -29,7 +29,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
 	FindUserDetail(ctx context.Context, in *FindUserDetailRequest, opts ...grpc.CallOption) (*FindUserDetailResponse, error)
-	FindUserByKey(ctx context.Context, in *FindUserByKeyRequest, opts ...grpc.CallOption) (*FindUserByKeyResponse, error)
+	FindUserBySlug(ctx context.Context, in *FindUserBySlugRequest, opts ...grpc.CallOption) (*FindUserBySlugResponse, error)
 	UpdateUserBalance(ctx context.Context, in *UpdateUserBalanceRequest, opts ...grpc.CallOption) (*UpdateUserBalanceResponse, error)
 }
 
@@ -51,10 +51,10 @@ func (c *userServiceClient) FindUserDetail(ctx context.Context, in *FindUserDeta
 	return out, nil
 }
 
-func (c *userServiceClient) FindUserByKey(ctx context.Context, in *FindUserByKeyRequest, opts ...grpc.CallOption) (*FindUserByKeyResponse, error) {
+func (c *userServiceClient) FindUserBySlug(ctx context.Context, in *FindUserBySlugRequest, opts ...grpc.CallOption) (*FindUserBySlugResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(FindUserByKeyResponse)
-	err := c.cc.Invoke(ctx, UserService_FindUserByKey_FullMethodName, in, out, cOpts...)
+	out := new(FindUserBySlugResponse)
+	err := c.cc.Invoke(ctx, UserService_FindUserBySlug_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -76,7 +76,7 @@ func (c *userServiceClient) UpdateUserBalance(ctx context.Context, in *UpdateUse
 // for forward compatibility.
 type UserServiceServer interface {
 	FindUserDetail(context.Context, *FindUserDetailRequest) (*FindUserDetailResponse, error)
-	FindUserByKey(context.Context, *FindUserByKeyRequest) (*FindUserByKeyResponse, error)
+	FindUserBySlug(context.Context, *FindUserBySlugRequest) (*FindUserBySlugResponse, error)
 	UpdateUserBalance(context.Context, *UpdateUserBalanceRequest) (*UpdateUserBalanceResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }
@@ -91,8 +91,8 @@ type UnimplementedUserServiceServer struct{}
 func (UnimplementedUserServiceServer) FindUserDetail(context.Context, *FindUserDetailRequest) (*FindUserDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method FindUserDetail not implemented")
 }
-func (UnimplementedUserServiceServer) FindUserByKey(context.Context, *FindUserByKeyRequest) (*FindUserByKeyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method FindUserByKey not implemented")
+func (UnimplementedUserServiceServer) FindUserBySlug(context.Context, *FindUserBySlugRequest) (*FindUserBySlugResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FindUserBySlug not implemented")
 }
 func (UnimplementedUserServiceServer) UpdateUserBalance(context.Context, *UpdateUserBalanceRequest) (*UpdateUserBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserBalance not implemented")
@@ -136,20 +136,20 @@ func _UserService_FindUserDetail_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _UserService_FindUserByKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(FindUserByKeyRequest)
+func _UserService_FindUserBySlug_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FindUserBySlugRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(UserServiceServer).FindUserByKey(ctx, in)
+		return srv.(UserServiceServer).FindUserBySlug(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: UserService_FindUserByKey_FullMethodName,
+		FullMethod: UserService_FindUserBySlug_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserServiceServer).FindUserByKey(ctx, req.(*FindUserByKeyRequest))
+		return srv.(UserServiceServer).FindUserBySlug(ctx, req.(*FindUserBySlugRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -184,8 +184,8 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _UserService_FindUserDetail_Handler,
 		},
 		{
-			MethodName: "FindUserByKey",
-			Handler:    _UserService_FindUserByKey_Handler,
+			MethodName: "FindUserBySlug",
+			Handler:    _UserService_FindUserBySlug_Handler,
 		},
 		{
 			MethodName: "UpdateUserBalance",
